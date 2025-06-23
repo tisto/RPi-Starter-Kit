@@ -4,8 +4,9 @@
 # author: Tony
 # http://elecrow.com/
 
-import RPi.GPIO as GPIO
 import time
+
+import RPi.GPIO as GPIO
 
 servo_pin = 12
 fpwm = 50
@@ -17,6 +18,7 @@ fpwm = 50
 a = 45
 b = 18.0
 
+
 def setup():
     global pwm
     GPIO.setmode(GPIO.BCM)
@@ -24,17 +26,18 @@ def setup():
     pwm = GPIO.PWM(servo_pin, fpwm)
     pwm.start(2.5)
 
+
 def setDirection(direction):
     duty = (direction + a)/b
     pwm.ChangeDutyCycle(duty)
-    print "direction =", direction, "-> duty =", duty
+    print("direction =", direction, "-> duty =", duty)
     time.sleep(1) 
-   
-print "starting"
+
+print("starting")
 setup()
 for direction in range(0, 181, 90):
     setDirection(direction)    
 setDirection(0)    
 GPIO.cleanup() 
-print "done"
-    
+print("done")
+
